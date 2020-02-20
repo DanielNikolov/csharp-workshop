@@ -7,6 +7,9 @@ namespace Task.Messages
 {
     public class NotPositiveQuantityMessage : Exception
     {
-        public string Message => "A positive quantity was not provided";
+        public NotPositiveQuantityMessage(string message) : base(message)
+        {
+
+        }
     }
 }

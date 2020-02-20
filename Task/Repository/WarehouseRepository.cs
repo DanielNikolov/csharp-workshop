@@ -11,10 +11,12 @@ namespace Task.Repository
     public class WarehouseRepository : IWarehouseRepository
     {
         private Dictionary<int, int> CapacityRecords;
+        private Dictionary<int, int> WarehouseEntries;
 
         public WarehouseRepository()
         {
             CapacityRecords = new Dictionary<int, int>();
+            WarehouseEntries = new Dictionary<int, int>();
         }
         public IEnumerable<CapacityRecord> GetCapacityRecords()
         {
@@ -42,7 +44,14 @@ namespace Task.Repository
             {
                 throw new QuantityTooLowMessage("Provided quantity is not enough");
             }
-            throw new NotImplementedException();
+            int? storedCapacity = CapacityRecords[productId];
+
+            if (storedCapacity.HasValue && capacity < storedCapacity)
+            {
+                throw new QuantityTooLowMessage("Provided quantity is too low");
+            }
+
+            CapacityRecords.Add(productId, capacity);
         }
 
         public void SetProductRecord(int productId, int quantity)

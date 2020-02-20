@@ -7,6 +7,9 @@ namespace Task.Messages
 {
     public class QuantityTooHighMessage : Exception
     {
-        public string Message => "Too high a quantity was provided";
+        public QuantityTooHighMessage(string message) : base(message)
+        {
+
+        }
     }
 }

@@ -11,6 +11,5 @@ namespace Task.Messages
         {
 
         }
-        public string Message => "Too low a quantity was provided";
     }
 }
